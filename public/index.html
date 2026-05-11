@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocalize | Advanced Call Intelligence</title>
+    <meta name="description" content="AI-powered audio analysis, transcription, and emotion detection.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                </div>
+                <h1>Vocalize AI</h1>
+            </div>
+            <p class="subtitle">Extract intelligence from any conversation</p>
+        </header>
+
+        <section class="upload-section" id="uploadSection">
+            <div class="upload-box" id="dropZone">
+                <input type="file" id="audioInput" accept="audio/*" hidden>
+                <div class="upload-content">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <h3>Upload Audio</h3>
+                    <p>Drag & drop or click to browse</p>
+                    <span class="file-hint">Supports WAV, MP3, M4A up to 25MB</span>
+                </div>
+            </div>
+            <div id="fileInfo" class="file-info hidden">
+                <span id="fileName" class="file-name"></span>
+                <button id="processBtn" class="btn primary">Analyze Audio</button>
+            </div>
+        </section>
+
+        <section class="processing-state hidden" id="processingState">
+            <div class="spinner"></div>
+            <h3 id="processingText">Transcribing & Analyzing...</h3>
+            <p>This may take a few moments depending on the file size.</p>
+        </section>
+
+        <section class="results-dashboard hidden" id="resultsDashboard">
+            <div class="dashboard-header">
+                <h2>Analysis Report</h2>
+                <button id="resetBtn" class="btn secondary">New Analysis</button>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Conversation Quality</h4>
+                    <div id="convQuality" class="badge"></div>
+                </div>
+                <div class="metric-card">
+                    <h4>Overall Sentiment</h4>
+                    <div id="sentiment" class="badge"></div>
+                </div>
+                <div class="metric-card">
+                    <h4>Resolution Status</h4>
+                    <div id="resolutionStatus" class="badge"></div>
+                </div>
+                <div class="metric-card">
+                    <h4>Primary Emotion</h4>
+                    <div id="primaryEmotion" class="badge"></div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card summary-card">
+                    <h3>Summary</h3>
+                    <p id="summaryText"></p>
+                </div>
+                <div class="card topics-card">
+                    <h3>Topics Discussed</h3>
+                    <div id="topicsTags" class="tags-container"></div>
+                </div>
+            </div>
+
+            <div class="card full-width transcript-card">
+                <h3>Transcript</h3>
+                <div class="transcript-box" id="transcriptText"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
