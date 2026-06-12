@@ -844,9 +844,17 @@ body {
     box-shadow: 0 1px 6px var(--accent-glow);
 }
 
-/* Bilingual content visibility */
 [data-lang="ar"] .lang-en-only { display: none !important; }
 [data-lang="en"] .lang-ar-only { display: none !important; }
+
+[data-lang="ar"] {
+    direction: rtl;
+}
+
+[data-lang="ar"] .agent-match-bar {
+    text-align: left;
+}
+
 
 /* ── Metric Bars ─────────────────────────────────────────── */
 .metrics-bars-section {
