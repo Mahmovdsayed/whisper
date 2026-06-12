@@ -36,3 +36,8 @@ wheels/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Database
+vocalize.db
+vocalize.db-shm
+vocalize.db-wal

@@ -1,9 +1,10 @@
 import gc
 import os
+import subprocess
 import tempfile
 import traceback
 
-os.environ["HF_TOKEN"] = ""
+os.environ["HF_TOKEN"] = "your_secret_token_here"
 
 import torch
 import torchaudio
@@ -24,13 +25,13 @@ app.add_middleware(
 device = "mps" if torch.backends.mps.is_available() else "cpu"
 print(f"System has {device} available, but forcing CPU for stability.")
 
-whisper_model = WhisperModel("tiny", device="cpu", compute_type="int8")
-print("Faster‑Whisper (tiny, int8) loaded on CPU.")
+whisper_model = WhisperModel("small", device="cpu", compute_type="int8")
+print("Faster‑Whisper (small, int8) loaded on CPU.")
 
 emotion_pipe = pipeline(
-    "audio-classification", model="superb/wav2vec2-base-superb-er", device="cpu"
+    "audio-classification", model="ahmmedasaad2772/wav2vec2-base-arabic_speech_emotion_recognition", device="cpu"
 )
-print("Emotion model loaded on CPU.")
+print("Arabic Emotion model loaded on CPU.")
 
 MAX_DURATION_SEC = 600
 
@@ -44,7 +45,7 @@ def truncate_audio_if_needed(file_path: str) -> None:
 
 @app.get("/")
 async def health_check():
-    return {"status": "healthy", "models": "whisper(tiny,int8) + wav2vec2-er"}
+    return {"status": "healthy", "models": "whisper(small,int8) + arabic-wav2vec2-er"}
 
 @app.post("/process-audio")
 async def process_audio(file: UploadFile = File(...)):
@@ -54,9 +55,36 @@ async def process_audio(file: UploadFile = File(...)):
     tmp_path = None
 
     try:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
-            tmp_file.write(await file.read())
-            tmp_path = tmp_file.name
+        _, ext = os.path.splitext(file.filename)
+        if not ext:
+            ext = ".tmp"
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as upload_tmp:
+            upload_tmp.write(await file.read())
+            upload_tmp_path = upload_tmp.name
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as wav_tmp:
+            tmp_path = wav_tmp.name
+
+        try:
+            cmd = [
+                "ffmpeg", "-y",
+                "-i", upload_tmp_path,
+                "-ar", "16000",
+                "-ac", "1",
+                "-acodec", "pcm_s16le",
+                tmp_path
+            ]
+            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.returncode != 0:
+                print(f"FFmpeg conversion error: {result.stderr}")
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Failed to decode or convert audio file: {result.stderr}"
+                )
+        finally:
+            if os.path.exists(upload_tmp_path):
+                os.remove(upload_tmp_path)
 
         print(f"Processing: {file.filename}")
 

@@ -1,87 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocalize | Advanced Call Intelligence</title>
-    <meta name="description" content="AI-powered audio analysis, transcription, and emotion detection.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Vocalize AI — منصة ذكاء المكالمات | Call Intelligence Platform</title>
+    <meta name="description" content="AI-powered audio analysis, transcription, emotion detection and smart customer support routing. تحليل ذكي للمكالمات الصوتية باللغتين العربية والإنجليزية.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container">
-        <header class="header">
-            <div class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+
+    <!-- ── Top Navigation Bar ─────────────────────────────── -->
+    <nav class="topnav">
+        <div class="topnav-inner">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="22"/>
+                    </svg>
                 </div>
-                <h1>Vocalize AI</h1>
+                <span class="brand-name">Vocalize<span class="brand-ai">AI</span></span>
             </div>
-            <p class="subtitle">Extract intelligence from any conversation</p>
+            <div class="nav-actions">
+                <!-- Language Toggle -->
+                <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
+                    <button class="lang-btn active" id="btnLangEn" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" id="btnLangAr" onclick="setLang('ar')">ع</button>
+                </div>
+                <a href="/admin" target="_blank" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Admin
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon dark-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </span>
+                    <span class="theme-icon light-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-wrap">
+
+        <!-- ── Hero Header ────────────────────────────────── -->
+        <header class="hero">
+            <div class="hero-eyebrow">
+                <span class="eyebrow-dot"></span>
+                <span class="lang-en-only">Voice Message Intelligence Platform</span>
+                <span class="lang-ar-only">منصة تحليل الرسائل الصوتية</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="lang-en-only">Turn Voice Into<br><span class="hero-gradient">Deep Insights</span></span>
+                <span class="lang-ar-only" style="direction:rtl">حوّل الرسالة الصوتية<br><span class="hero-gradient">لتقرير واضح</span></span>
+            </h1>
+            <p class="hero-sub lang-en-only">Upload a customer voice message. We transcribe it, detect emotions, understand the problem, and auto-route to the right agent.</p>
+            <p class="hero-sub lang-ar-only" style="direction:rtl">ارفع الرسالة الصوتية من العميل، بنكتبها ونحلل مشاعره ونفهم شكواه، ثم بنوجهها للوكيل المناسب تلقائياً.</p>
         </header>
 
+        <!-- ── Upload Section ─────────────────────────────── -->
         <section class="upload-section" id="uploadSection">
-            <div class="upload-box" id="dropZone">
+            <div class="upload-zone" id="dropZone">
                 <input type="file" id="audioInput" accept="audio/*" hidden>
-                <div class="upload-content">
-                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                    <h3>Upload Audio</h3>
-                    <p>Drag & drop or click to browse</p>
-                    <span class="file-hint">Supports WAV, MP3, M4A up to 25MB</span>
+                <div class="upload-zone-inner">
+                    <div class="upload-orb">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                        </svg>
+                    </div>
+                    <h2 class="upload-title">
+                        <span class="lang-en-only">Drop a customer voice message</span>
+                        <span class="lang-ar-only">أفلت الرسالة الصوتية هنا</span>
+                    </h2>
+                    <p class="upload-sub">
+                        <span class="lang-en-only">or <span class="upload-browse">click to browse</span></span>
+                        <span class="lang-ar-only">أو <span class="upload-browse">اضغط واختار</span></span>
+                    </p>
+                    <div class="upload-formats">
+                        <span>MP3</span><span>WAV</span><span>M4A</span><span>OGG</span>
+                    </div>
                 </div>
             </div>
-            <div id="fileInfo" class="file-info hidden">
-                <span id="fileName" class="file-name"></span>
-                <button id="processBtn" class="btn primary">Analyze Audio</button>
+
+            <div id="fileInfo" class="file-ready hidden">
+                <div class="file-ready-left">
+                    <div class="file-icon-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <div>
+                        <p class="file-ready-name" id="fileName">audio.mp3</p>
+                        <p class="file-ready-hint">
+                            <span class="lang-en-only">Ready to analyze</span>
+                            <span class="lang-ar-only">جاهز للتحليل</span>
+                        </p>
+                    </div>
+                </div>
+                <button id="processBtn" class="btn-analyze">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <span class="lang-en-only">Analyze Now</span>
+                    <span class="lang-ar-only">ابدأ التحليل</span>
+                </button>
             </div>
         </section>
 
-        <section class="processing-state hidden" id="processingState">
-            <div class="spinner"></div>
-            <h3 id="processingText">Transcribing & Analyzing...</h3>
-            <p>This may take a few moments depending on the file size.</p>
+        <!-- ── Processing ─────────────────────────────────── -->
+        <section class="processing-view hidden" id="processingState">
+            <div class="processing-inner">
+                <div class="processing-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke-width="6" class="ring-bg"/>
+                        <circle cx="50" cy="50" r="40" fill="none" stroke-width="6" class="ring-spin" stroke-dasharray="251" stroke-dashoffset="60"/>
+                    </svg>
+                    <div class="processing-mic">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                    </div>
+                </div>
+                <h3>
+                    <span class="lang-en-only">Processing voice message...</span>
+                    <span class="lang-ar-only">بيشتغل على الرسالة...</span>
+                </h3>
+                <p>
+                    <span class="lang-en-only">Transcribing → Detecting emotions → Routing to agent</span>
+                    <span class="lang-ar-only">بيكتب → بيحلل المشاعر → بيوجه للوكيل</span>
+                </p>
+                <div class="processing-steps">
+                    <span class="step active">🎙 <span class="lang-en-only">Transcribe</span><span class="lang-ar-only">كتابة الصوت</span></span>
+                    <span class="step-arrow">→</span>
+                    <span class="step">🧠 <span class="lang-en-only">Analyze</span><span class="lang-ar-only">تحليل</span></span>
+                    <span class="step-arrow">→</span>
+                    <span class="step">📋 <span class="lang-en-only">Report</span><span class="lang-ar-only">تقرير</span></span>
+                </div>
+            </div>
         </section>
 
-        <section class="results-dashboard hidden" id="resultsDashboard">
-            <div class="dashboard-header">
-                <h2>Analysis Report</h2>
-                <button id="resetBtn" class="btn secondary">New Analysis</button>
+        <!-- ── Results Dashboard ──────────────────────────── -->
+        <section class="dashboard hidden" id="resultsDashboard">
+
+            <div class="dashboard-topbar">
+                <div class="dashboard-title-group">
+                    <h2>
+                        <span class="lang-en-only">Analysis Report</span>
+                        <span class="lang-ar-only">تقرير التحليل</span>
+                    </h2>
+                    <span class="db-chip hidden" id="savedBadge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span class="lang-en-only">Saved</span>
+                        <span class="lang-ar-only">محفوظ</span>
+                    </span>
+                </div>
+                <button id="resetBtn" class="btn-ghost">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+                    <span class="lang-en-only">New Analysis</span>
+                    <span class="lang-ar-only">تحليل جديد</span>
+                </button>
             </div>
-            
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <h4>Conversation Quality</h4>
-                    <div id="convQuality" class="badge"></div>
+
+            <!-- Metric Cards Row -->
+            <div class="metrics-row">
+                <div class="metric-pill">
+                    <span class="metric-label">
+                        <span class="lang-en-only">Voice Quality</span>
+                        <span class="lang-ar-only">جودة الرسالة</span>
+                    </span>
+                    <span id="convQuality" class="badge"></span>
                 </div>
-                <div class="metric-card">
-                    <h4>Overall Sentiment</h4>
-                    <div id="sentiment" class="badge"></div>
+                <div class="metric-pill">
+                    <span class="metric-label">
+                        <span class="lang-en-only">Sentiment</span>
+                        <span class="lang-ar-only">الحالة العامة</span>
+                    </span>
+                    <span id="sentiment" class="badge"></span>
                 </div>
-                <div class="metric-card">
-                    <h4>Resolution Status</h4>
-                    <div id="resolutionStatus" class="badge"></div>
+                <div class="metric-pill">
+                    <span class="metric-label">
+                        <span class="lang-en-only">Issue Status</span>
+                        <span class="lang-ar-only">هل اتحلت؟</span>
+                    </span>
+                    <span id="resolutionStatus" class="badge"></span>
                 </div>
-                <div class="metric-card">
-                    <h4>Primary Emotion</h4>
-                    <div id="primaryEmotion" class="badge"></div>
+                <div class="metric-pill">
+                    <span class="metric-label">
+                        <span class="lang-en-only">Customer Emotion</span>
+                        <span class="lang-ar-only">إحساس العميل</span>
+                    </span>
+                    <span id="primaryEmotion" class="badge"></span>
                 </div>
             </div>
 
-            <div class="content-grid">
-                <div class="card summary-card">
-                    <h3>Summary</h3>
-                    <p id="summaryText"></p>
+            <!-- Agent Banner -->
+            <div id="assignedAgentBanner"></div>
+
+            <!-- Metric Bars: Engagement, Frustration, Confidence, Clarity, Conflict, Responsiveness -->
+            <div class="metrics-bars-section" id="metricsBarSection">
+                <div class="metrics-bars-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span class="lang-en-only">Voice Message Analysis</span>
+                    <span class="lang-ar-only">تحليل الرسالة الصوتية</span>
                 </div>
-                <div class="card topics-card">
-                    <h3>Topics Discussed</h3>
-                    <div id="topicsTags" class="tags-container"></div>
+                <div class="metric-bar-row" id="metricBarsContainer"></div>
+            </div>
+
+            <!-- Summary + Topics -->
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        <span class="lang-en-only">Complaint Summary</span>
+                        <span class="lang-ar-only">ملخص الشكوى</span>
+                    </div>
+                    <p id="summaryText" class="panel-body-text lang-en-only"></p>
+                    <p id="summaryTextAr" class="panel-body-text lang-ar-only" style="direction:rtl;text-align:right"></p>
+                </div>
+                <div class="panel">
+                    <div class="panel-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                        <span class="lang-en-only">Issues Raised</span>
+                        <span class="lang-ar-only">المواضيع المطروحة</span>
+                    </div>
+                    <div id="topicsTags" class="tags-wrap lang-en-only"></div>
+                    <div id="topicsTagsAr" class="tags-wrap lang-ar-only" style="direction:rtl"></div>
                 </div>
             </div>
 
-            <div class="card full-width transcript-card">
-                <h3>Transcript</h3>
-                <div class="transcript-box" id="transcriptText"></div>
+            <!-- Transcript -->
+            <div class="panel transcript-panel">
+                <div class="transcript-topbar">
+                    <div class="panel-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        <span class="lang-en-only">Voice Transcript</span>
+                        <span class="lang-ar-only">نص الرسالة</span>
+                    </div>
+                    <div class="tab-group">
+                        <button id="tabCleaned" class="tab active">
+                            ✨ <span class="lang-en-only">AI Corrected</span><span class="lang-ar-only">مصحَّح بالذكاء الاصطناعي</span>
+                        </button>
+                        <button id="tabRaw" class="tab">
+                            <span class="lang-en-only">Raw Output</span><span class="lang-ar-only">النص الخام</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="transcript-body" id="transcriptText"></div>
+                <div class="transcript-body hidden" id="rawTranscriptText"></div>
             </div>
+
         </section>
     </main>
 
