@@ -34,11 +34,11 @@ The platform uses local speech-to-text and emotion classification models alongsi
 ```mermaid
 sequenceDiagram
     actor Customer
-    participant Frontend as Web Dashboard (Hono)
-    participant Orchestrator as Hono Server (Bun)
-    participant ML_Server as ML Engine (FastAPI)
-    participant LLM as Google Gemini (API)
-    database SQLite as SQLite DB (vocalize.db)
+    participant Frontend as "Web Dashboard (Hono)"
+    participant Orchestrator as "Hono Server (Bun)"
+    participant ML_Server as "ML Engine (FastAPI)"
+    participant LLM as "Google Gemini (API)"
+    participant SQLite as "SQLite DB (vocalize.db)"
 
     Customer->>Frontend: Upload Voice Message (.wav, .mp3, etc.)
     Frontend->>Orchestrator: POST /upload (Audio Multipart)
